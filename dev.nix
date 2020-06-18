@@ -5,7 +5,7 @@ let
     
     src = fetchurl {
       url = https://github.com/federatedcloud/osu-micro-benchmarks-5.6.2/releases/download/v5.6.2/osu-micro-benchmarks-5.6.2.tar.gz;
-      sha256 = "14ah07y05lq29ax1zwk8x0cyj5cm7xxrk9lxvmxm6zpcclgbr4xz";
+      sha256 = "164kc3xlfl7agidkj9g1bpjlls0im4m6rs411j36fk7r5nb7wbg2";
     };
     phases = "installPhase";
     
@@ -31,7 +31,12 @@ stdenv.mkDerivation {
     
     # Benchmarking
     hpl
-    #osu-micro-benchmarks
+    osu-micro-benchmarks
   ];
   src = null;
+  shellHook = ''
+    export LANG=en_US.UTF-8
+    ln -sfn ${hpl.out}/bin/xhpl /usr/bin
+    ln -sfn ${osu-micro-benchmarks.out}/bin/* /usr/bin
+  '';
 }
